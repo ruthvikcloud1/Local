@@ -361,3 +361,112 @@ Notes:
 If a table’s columns aren’t NTID_UPN and VALUE, the code stops and lists the columns it found. Fix the two names at the top and run it again.
 NTIDs are lowercased, so the app should lowercase the signed-in user’s ID before matching.
 Run this notebook again, or schedule it, whenever the DPM source tables refresh, so the app stays in sync.
+
+
+
+
+
+
+
+
+
+
+
+1. Sell-Out with partner hierarchy: a query with amounts
+
+The query you sent yesterday only gives the hierarchy. Karthik needs the numbers joined to it.
+One row should carry:
+the DPM (security) columns
+mega-region → manager → seller → partner
+quarter / calendar link
+units and $
+The data is in the sell-out fact table.
+
+2. Pipeline: the same kind of query
+
+Source: the pipeline fact table (probably pipeline_data_final; confirm).
+Columns: the same hierarchy, quarter, DPM columns, plus units and $.
+
+3. Sell-Out Mix-Val: a query for the new tab
+
+Lynn asked for a separate tab: “Sell-Out (mix valuation)”, from the mix-valuation fact table.
+Level: it should look like the Sell-In and Sell-Through views, at CUST2 level, with no partner level. This still needs Lynn to confirm.
+So there will be 2 sell-out views:
+Normal sell-out: partner hierarchy
+Mix-val sell-out: CUST2 level
+
+
+
+
+
+/* -------------------------------------------------------------------------------------
+   PEOPLE — current, internal users.
+   FEDERATIONIDENTIFIER is the NTID the app signs in with (<ntid>@amd.com). It is NOT the
+   mail address: matching on EMAIL resolves 8 of 10,059 people, FEDERATIONIDENTIFIER 1,132.
+   ------------------------------------------------------------------------------------- */
+WITH people AS (
+    SELECT u.USER_ID,
+           u.NAME,
+           u.TITLE,
+           u.MANAGERID,
+           u.ISACTIVE,
+           LOWER(u.FEDERATIONIDENTIFIER) + '@amd.com'   AS upn
+    FROM   BMS_DATA.DIMS.VW_SFDC_DIM_USER AS u
+    WHERE  u.CURRENT_FLAG = 1
+      AND  u.USERTYPE     = 'Standard'
+),
+ 
+/* MANAGEMENT ROLL-UP — each person, plus every person beneath them.
+   Recursive walk down MANAGERID. This is the roll-up Edwin described: a manager gets
+   their reports' accounts, level by level. */
+chain AS (
+    SELECT  m.USER_ID AS manager_id, m.USER_ID AS covered_user_id, 0 AS depth
+    FROM    people AS m
+    UNION ALL
+    SELECT  c.manager_id, r.USER_ID, c.depth + 1
+    FROM    chain  AS c
+    JOIN    people AS r
+              ON LEFT(r.MANAGERID, 15) = LEFT(c.covered_user_id, 15)
+    WHERE   c.depth < 10                      -- guard against a cycle in MANAGERID
+)
+ 
+/* =====================================================================================
+   1) PIPELINE TARGET
+   Fact:    Sales_Planning_WS2.dbo.pipeline_data_final        637,502 rows
+   Account: KEY_ACCOUNTID -> VW_SFDC_DIM_ACCOUNT_LIVE.ACCOUNT_ID    resolves 100.0%
+   Record types present: Sales Parent 632,882 + Global Ultimate 4,618  (Edwin's question)
+   Owner:   the fact also carries KEY_ACCOUNT_OWNER, 100% populated, and it agrees with
+            the account dimension's OWNER_ID on 98.9% of rows. The account dimension is
+            used below because it is the audited source; swap in KEY_ACCOUNT_OWNER if
+            Lynn prefers the value frozen on the fact.
+   ===================================================================================== */
+SELECT      f.*
+FROM        Sales_Planning_WS2.dbo.pipeline_data_final AS f
+INNER JOIN  BMS_DATA.DIMS.VW_SFDC_DIM_ACCOUNT_LIVE AS acct
+              ON  acct.ACCOUNT_ID = f.KEY_ACCOUNTID
+              AND acct.ISDELETED <> 1
+              AND acct.ACCOUNT_RECORD_TYPE_NAME IN ('Sales Parent', 'Global Ultimate')
+INNER JOIN  chain  AS c  ON LEFT(c.covered_user_id, 15) = LEFT(acct.OWNER_ID, 15)
+INNER JOIN  people AS me ON LEFT(me.USER_ID, 15)        = LEFT(c.manager_id, 15)
+WHERE       me.upn = :signed_in_upn;        -- e.g. 'aabohler@amd.com'
+ 
+/* =====================================================================================
+   2) SELL-OUT TARGET BY PARTNER
+   Fact:    Lynn's partner sell-out upload       426,768 rows
+   Account: KEY_PARTNER_SFDC_ID -> ACCOUNT_ID, restricted to the partner record types so
+            an end-customer account of the same name cannot match.
+   Owner:   the partner account's OWNER_ID — a Partner Sales Manager. 117 of the 173
+            partner-account owners do NOT appear in the pipeline approver table, which is
+            why the roll-up here is MANAGERID and not the pipeline approver levels.
+   ===================================================================================== */
+SELECT      f.*
+FROM        <partner_sellout_fact> AS f
+INNER JOIN  BMS_DATA.DIMS.VW_SFDC_DIM_ACCOUNT_LIVE AS pa
+              ON  pa.ACCOUNT_ID = f.KEY_PARTNER_SFDC_ID
+              AND pa.ISDELETED <> 1
+              AND pa.ACCOUNT_RECORD_TYPE_NAME IN
+                  ('Partner/Site', 'Commercial Systems Channel',
+                   'Consumer Systems Channel', 'Systems GTM')
+INNER JOIN  chain  AS c  ON LEFT(c.covered_user_id, 15) = LEFT(pa.OWNER_ID, 15)
+INNER JOIN  people AS me ON LEFT(me.USER_ID, 15)        = LEFT(c.manager_id, 15)
+WHERE       me.upn = :signed_in_upn;
