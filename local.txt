@@ -287,3 +287,77 @@ Refresh the flat table whenever the source security tables refresh.
 Fallback: use the semantic model directly. The Power BI REST API executeQueries call supports impersonatedUserName, so DAX runs under the model's own RLS. This reuses DPM exactly. Check two things: whether the service principal is allowed to impersonate on a dataset with RLS, and whether it's fast enough. Write-back would still go to the database.
 
 Manager's three options (from the call): (1) build a table and check it can copy all the logic, (2) use the semantic model directly through an API, (3) a query/script that pulls data through the semantic model into the app.
+
+
+
+from pyspark.sql import functions as F
+from functools import reduce
+
+# Security table name -> type label
+security_tables = {
+    "VW_DIM_SECURITY_VALUECHAIN":      "VALUECHAIN",
+    "VW_DIM_SECURITY_VP2":             "VP2",
+    "VW_DIM_SECURITY_MEGAREGION":      "MEGAREGION",
+    "VW_DIM_SECURITY_PRODUCTGROUP":    "PRODUCTGROUP",
+    "VW_DIM_SECURITY_MEASURES_BLUE":   "BLUE",
+    "VW_DIM_SECURITY_MEASURES_GREEN":  "GREEN",
+    "VW_DIM_SECURITY_MEASURES_RED":    "RED",
+    "VW_DIM_SECURITY_MEASURES_PURPLE": "PURPLE",
+    "VW_DIM_SECURITY_MEASURES_ORANGE": "ORANGE",
+}
+
+NTID_COL  = "NTID_UPN"   # change if the lakehouse column name is different
+VALUE_COL = "VALUE"
+
+dfs = []
+for table_name, sec_type in security_tables.items():
+    df = spark.read.table(table_name)
+
+    # Stop early if a column name doesn't match
+    missing = [c for c in (NTID_COL, VALUE_COL) if c not in df.columns]
+    if missing:
+        raise ValueError(f"{table_name} is missing {missing}. Columns found: {df.columns}")
+
+    dfs.append(
+        df.select(
+            F.lower(F.trim(F.col(NTID_COL))).alias("ntid"),
+            F.lit(sec_type).alias("security_type"),
+            F.trim(F.col(VALUE_COL).cast("string")).alias("allowed_value"),
+            F.lit(table_name).alias("source_table"),
+        )
+    )
+
+# Combine all 9, remove blanks and duplicates
+dpm_access = (
+    reduce(lambda a, b: a.unionByName(b), dfs)
+    .filter(F.col("ntid").isNotNull() & (F.col("ntid") != ""))
+    .filter(F.col("allowed_value").isNotNull() & (F.col("allowed_value") != ""))
+    .dropDuplicates(["ntid", "security_type", "allowed_value"])
+    .withColumn("load_ts", F.current_timestamp())
+)
+
+# Save as a Delta table in the lakehouse
+(dpm_access.write
+    .mode("overwrite")
+    .option("overwriteSchema", "true")
+    .format("delta")
+    .saveAsTable("app_dpm_user_access"))
+
+print("Rows written:", dpm_access.count())
+
+Quick check (run in the next cell):
+
+python
+t = spark.read.table("app_dpm_user_access")
+
+# Row count per type
+t.groupBy("security_type").count().orderBy("security_type").show()
+
+# One user's access (put a real NTID / email here)
+t.filter(F.col("ntid") == "someone@amd.com").orderBy("security_type").show(100, False)
+
+Notes:
+
+If a table’s columns aren’t NTID_UPN and VALUE, the code stops and lists the columns it found. Fix the two names at the top and run it again.
+NTIDs are lowercased, so the app should lowercase the signed-in user’s ID before matching.
+Run this notebook again, or schedule it, whenever the DPM source tables refresh, so the app stays in sync.
