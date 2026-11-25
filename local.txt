@@ -140,3 +140,150 @@ Things to check first:
  Use the combined per-NTID query your other contact is sending to validate whatever you build.
 
 Option A is usually the quickest to build with this little time left. I can help you design the table, or write up the approach for Karthik.
+
+
+
+5) Redirect the sign in, in the back end, to this, uh, quarter of a client, it is, this client, it's, Yeah, client ID and client secret. The back in, you are into it, for the sign in. And in terms of certificates and client secrets, we need to add that in the app registration.  Yeah. That's all, that's it. That's the only thing that we have to do.  We don't, we we don't have to add an identity provider or anything. Very saving this identity provided. Yes.  Another thing, can you tell me where did you do it? Uh, I did not do it, but no, Jagdish was asking like he wanted to see something so that is what we were checking in. Okay, like, I just want to know where he, like, where was the identity you were like, like, are you doing it for the app registration or are it something else?  I think he was doing it for the EnterIDA app registration. Okay, so, okay, whether he's using hand applications, or andra, our app registrations. And sorry, anthroplace applications are, uh, average registration.  That's my question. Uh, I'm not sure if it, but he has sent me some steps uh, to follow. Maybe I can forward it to you.  Okay. No, he's not from this project. Oh okay.  I'll send it to you, sir. Because I do not, not sure if I sure think so. See, uh, for entrasignment, I was just trying to, I don't think what I can do is, what I can do is, say.  Give him the RFC backing. Like, from that, we can check and implement that in the same plan, right? How that RFE is back in working, duplicated same.  Yeah, that's all we like we have to do literally. I'll, I'll just put it all in the group now, for entras signing, we don't need it. We already have the app registration provision.  We are reusing the same The same one that RFP uses, uh, We might just have to replicate the authentication back in, That's being done. Over there. Uh, so in terms of, uh, earthquake, like, uh, one question.  How you are identifying a user? Within your application. That's a question.  To be honest, I am not sure if it troubled, like, uh, Let's say, like, okay, uh, okay, let's say you are providing you are refining in through uh, Microsoft, right? Okay? Microsoft will have some information.  So it gives you your under ID. It gives your mail ID, your name, that will be returned to you, and your application has to get that and based on information, you have to allow users into the application rate. So it has given some values.  You have to check it in your application, whether this person can use a term, right? Huh? So in our application, we are using the mail ID.  Male ID. Okay? The Andra will return male ID. will validate with the nar database.  So what does it going do you going? what are you going to? Robert, what did you add in the app registration?  Just the secret and then the certificate that we generated over. That's the secret and yeah, nothing secret and locally generated certificate. Right, yeah.  And then uh, app registration, we are adding these 2 Do we have to add it in the keyboard as well? Yeah, showing to have the, you need the certificate to be added in the keyword. It can't be scrolling.  So we are using keyword as well to store it, right? Yeah, not locally or anything validating. No, no, no, no.  No, no, no. Okay. In terms of app registration, You need to have it.  Same locally generated certificate. Yeah. Yeah, I had it basically. okay.  So, you locally generated certificate. So for Andras Indian, we don't need it. We already have an app registration provision.  We're reusing the same one that RF uses. We may just have to replicate the authentication back in, that's all. That's being done over there.  Uh, in terms of our registration, client secret, and locally generated certificate to be added. Was your keyboard, same location? Okay.  So we are just redirecting it. Let them figure it out. I think they'll figure it out.  Yeah. If they look at the back end. Yeah.  That's fine. I don't know how they provisioned it in production 1st of all. No, okay, we would have had a...  We would be fighting, yeah, yeah, in Posig, yes. That's fine. That's a good thing.  Okay, Ruthwick, what we can do is... I'll send you the back end code. Like the entire RFP code, right?  So figure out how that authentication, entrasign, and redirection out, like what, what exactly is in the, the background? I also like, oh, you can just put it into the glad and ask, what are the things that Andra is being used in the back end and what how they are mapping it to the table or something? So if you need, if you are using any other things to identify the user, add it in the app registration. to give it as a response.  Okay. Let's say if you're using, what, let's say, let's say if you're using a pro and, what to say, like you are, you are designation as your identification, add it in the token. I hope you can, you can have it in the average, you can add it as an additional permission.  Okay, okay. I'll check it. Yeah.  Yeah, sure. Okay. Is there anything else?  Uh, one sec. That's one thing. Okay, uh, app registration, yeah, figure it out.  Have it ready for them, right? Because they can just integrate it quickly once it's ready. Second thing is, uh, Check the DPM DPM, how we can use it.  Are you working on? Yeah, yeah. So I'm 1st trying to like finish this training material thing, like the new instructions that I've given.  So once I'm done with that, then I'll start working on the DPM part. Because DPM is... Yeah, yeah.  Crucial. Crucial, yeah, yeah. So, yeah, I will try to finish this like in 30 or one hour or something.  Then, uh, started with DPM part. We need to get that right, because see, like data is the crucial part, right? Correct, yeah, yeah.  Building an application is, it doesn't make any sense if you don't have the right data to integrate it with. So what they have built, the WS2 team, we should have known it one week in advance through you, basically, because you are working on it from the beginning, like the entire sales scanning project. But I was on the...  Okay, yeah. See WS1 or WS2 doesn't matter. You, you are the bridge.  Between the new team and and the old data team, right? So you would know you would know who is working on what, whether it's WS1 or WS2. So, Lin doesn't have to come and say like, you know, you have to enable all these DPM on all the fields or the rows. that we have.  You should you should be knowing it in advance because you are there in all the calls previously. There are also like, you know, uh, Attending all the meetings and you have the access to the world-space data aspect. So, just that, like, if you would have let us know earlier, we would have worked on it much earlier itself.  Yep. So yeah, I'll get try to get as much as information about the TV import and send it to her. See, getting the information is not gonna work.  We need to get implemented. So what are we going to do to implement it to the application? That information, I can also like get, see, like I can go search all the tables, I can check the columns, fields.  I can I can put it in the claw. I can understand what's happening and everything. But how are we going to use the application?  That's that's the question. Whether we have to build a table, If we build a table, will we be able to replicate all the logics that are being applied? Or if you don't want to go through that path, Can we use the semantic model directly, somehow, through an ATA or something?  Or if you can write like a, I don't know, like a query or even a script to just get the data, underlying data through the semantic model. And load it in the application. So you need to think about the approach, solutioning.  So understand the problem. Like, do you get like what exactly we are trying to do with DPM? Yeah.  Yeah, so if you get it, you can understand what you have to do, like, uh, in terms of data, because we already have everything that is built, from what I can see and understand. Just how we are going to apply it. That's the question.  Okay, yeah. Yeah, figure they're out. We need a solution because, uh, this is very tight.  It's already Wednesday. Got it. You need to get it somewhere.  Yeah, I will prioritize that first. Okay, yeah. The main thing is like, we need to get it done, whether it's correct or wrong, 2nd thing, because we don't have time for data validation.  So get it done, somehow, like the DPM, how we are integrating it with our application. I am working on this other thing, other 2 tabs and everything, the query data valuation. So I need to get it done.  You focus on this thing. Broad. Yeah.  Okay. Yeah. Okay.  All right. So... Okay.  Yeah, thanks. Yeah, thanks, thanks. Thanks, thanks.  Bye.
+
+
+
+6)The DPM part of this call
+
+What your manager said:
+
+DPM is the top priority. Data is the crucial part, and the app is pointless without the right data behind it.
+He wants it built, not researched. He can find the tables and columns himself. The real question is how the app will use DPM.
+Three options he named:
+Build a table for the app, and check whether it can copy all the DPM logic.
+Use the semantic model directly, through an API or similar.
+Write a query or script that pulls the data through the semantic model and loads it into the app.
+What he’s expecting: understand the problem first, then come back with an approach and a solution. The DPM pieces are already built; what’s missing is how to apply them in the app.
+Speed over perfection: “get it done, whether it’s correct or wrong, second thing.” There’s no time for full data validation.
+Feedback for you: you’re the bridge between the old data team and the new team, so he expected you to raise DPM about a week earlier, before Lynn had to bring it up.
+Who’s doing what: you finish the training material (about 30–60 minutes), then focus only on DPM. He’s handling the other two tabs and the query data validation.
+
+
+
+7) DPM (Data Permission Management) – Full Context for the SIP / Sales Planning App
+
+Use this as background. Items marked [CONFIRMED] come from the semantic model definition (Sales_Planning_Mode_V3.tmdl) or from team calls. Items marked [TO VERIFY] are assumptions that still need checking against the lakehouse.
+
+1. Project context
+Client: AMD. Project: Sales Planning, with two workstreams:
+WS1: sales planning (forecast, optimizer, scenarios). It produces sell-through and sell-out targets.
+WS2 / SIP: Target-to-SIP quota planning and approval.
+A custom web app is being built: React UI, FastAPI backend, Entra ID sign-in. The data lives in Microsoft Fabric.
+The WS2 semantic model is Sales_Planning_Mode_V3. It runs in Direct Lake mode on the lakehouse Sales_Planning_WS2. It has 48 tables, 66 relationships and 19 measures.
+The DPM security tables live in the lakehouse. [CONFIRMED]
+Client guidance (Edwin): do not rebuild the DPM logic. Reuse the DPM tables that already exist.
+Deadline: very tight (this week). Getting DPM working in the app comes first; full data validation comes second.
+2. The three access layers in the app
+#	Layer	Applies to	What it controls	Status
+1	DPM (enterprise data governance)	All SIP views: sell-in, sell-through, sell-out, mixed valuation, GM, pipeline	Customer/GTM, region, product group/BU, value chain, units vs dollars	Exists in the semantic model as RLS. Needs to be brought into the app
+2	Sales hierarchy (SFDC)	Only the pipeline target and sell-out target by partner	Which accounts a user sees, based on their place in the sales org (owner → manager → manager's manager)	Built by a teammate
+3	SIP role configuration	All views	A finer SIP-specific filter (for example, show sell-in revenue but not quantity). Plans/roles such as A100, A150 and A200, set up by SIP planners	Being built in the app
+
+Rules from the client:
+
+If a user can see a row, they can edit it. There's no separate edit permission.
+DPM is not SIP-specific. It's AMD's enterprise governance tool. The SIP role configuration narrows it down further for SIP purposes.
+3. How DPM works (plain explanation)
+Each security table lists a user's NTID next to a VALUE they're allowed to see. Example: ntid = ruthvik → VALUE = Apple means the user sees only the Apple customer.
+At sign-in, the user's identity is matched against these tables. Matching rows decide what the user can see.
+Value chain controls which areas a user sees: sell-in, sell-through or sell-out. A user may have "Sell-in, Sell-out" and not sell-through.
+Color tables (Blue, Green, Red, Purple, Orange) control which measures are visible, mainly units vs dollars, per fact table.
+4. RLS definition in the semantic model [CONFIRMED]
+One role, ALL_USERS (read), with 26 AMD members.
+Row filter: [NTID_UPN] = USERPRINCIPALNAME(). It's applied to 10 tables:
+VW_DIM_SECURITY_VALUECHAIN
+VW_DIM_SECURITY_VP2
+VW_DIM_SECURITY_MEGAREGION
+VW_DIM_SECURITY_PRODUCTGROUP
+VW_DIM_SECURITY_MEASURES_BLUE
+VW_DIM_SECURITY_MEASURES_GREEN
+VW_DIM_SECURITY_MEASURES_RED
+VW_DIM_SECURITY_MEASURES_PURPLE
+VW_DIM_SECURITY_MEASURES_ORANGE
+owner_hierarchy (this is the sales hierarchy layer, not DPM)
+Columns: each security table has an NTID / UPN column (NTID_UPN) and a VALUE column. [CONFIRMED in the model. Exact lakehouse column names TO VERIFY.] One team member described the VP2 table as having "NTID, UPN, DIM and VALUE".
+Security table → bridge → data [CONFIRMED]
+
+Each security table connects to its own _BRIDGE table on VALUE. That relationship filters in both directions with security filtering on. The bridge then connects to the data:
+
+Security table	Bridge connects to	Controls
+VW_DIM_SECURITY_VALUECHAIN	Value-chain bridge ← KEY_VALUECHAIN on all 5 fact tables	Sell-in / sell-through / sell-out access
+VW_DIM_SECURITY_VP2	VP2 bridge ← VW_DIM_GOTOMARKET_GTM.SECURITYKEY	Customer / go-to-market (GTM)
+VW_DIM_SECURITY_MEGAREGION	Megaregion bridge → dim_megaregion	Region
+VW_DIM_SECURITY_PRODUCTGROUP	Product-group bridge ← VW_DIM_PRODUCT_GROUP_ORG.KEY_PRODUCTGROUPORG	Product group / business unit / profit center
+
+[TO VERIFY] The bridge table names and columns. It's also unclear whether a bridge expands one VALUE into several data keys (for example a wildcard or "ALL" value). If it does, the app must join through the bridge rather than using the raw VALUE.
+
+Color (measure) security [CONFIRMED]
+Color table	Controls
+BLUE	Sell-in units
+GREEN	Sell-in dollars
+RED	Sell-in cost, sell-through, sell-out, GM
+PURPLE	Pipeline units
+ORANGE	Pipeline dollars
+The relationships from the color bridges to the fact tables are inactive. They're inactive because active links cancelled out the other security filters.
+Measures apply them with TREATAS(VALUES(<color bridge>[VALUE]), <fact>[KEY_MEASURE_x]).
+Example given in a call: if your NTID is in the Red bridge, you can see sell-out dollars.
+5. Fact tables and their security keys [CONFIRMED]
+Fact table	Contents	DPM-related joins
+sell_in_final	Sell-in targets: TOTAL_QTY, TOTAL_AMT, TOTALCOST	KEY_VALUECHAIN → value-chain bridge; KEY_GOTOMARKET → GTM; KEY_PRODUCTGROUPORG → product group org; KEY_GEOGRAPHY → territory_key_dist.SALES_VP_TERRITORY_KEY; KEY_CUSTOMER_TOPENDPARENT → customer; KEY_MEASURE_UNITS/DOLLAR/COST → BLUE/GREEN/RED bridges (inactive)
+vw_mixvaluation_targets_mapped	Sell-through mix-valuation targets (consumption/POS/pipeline units and $)	KEY_VALUECHAIN → value-chain bridge; KEY_GOTOMARKET → GTM.CODE; KEY_PRODUCTGROUPORG; KEY_GEOGRAPHY_MNC → VW_DIM_GEOGRAPHY.GEO_KEY; KEY_CUSTOMER_TOPENDPARENT; KEY_MEASURE_UNITS → RED bridge (inactive)
+sellout_union_partner_mapped	Sell-out: Total_Units, $, $/U	Key_Value_Chain → value-chain bridge; MegaRegion → dim_megaregion; SubRegion; Business_Unit → dim_business_unit; Customer_mapped → dim_customer_join_lookup; PARTNER_ID → bridge_partner; KEY_PARTNER_SFDC_ID → VW_SFDC_DIM_ACCOUNT_LIVE.ACCOUNT_ID and → sfdc_owner_accounts_composite.ACCOUNT_ID; Key_Measure → RED bridge (inactive)
+gross_margin_union	Rev_M, GP_ M, GM_%	Value_Chain → value-chain bridge; Segment → dim_business_unit; CODE → GTM.CODE; KEY_GOTOMARKET_NUM → VW_DIM_CUSTOMER.CUSTOMER_NUMBER
+pipeline_data_final	Account-target pipeline units/$	KEY_VALUECHAIN → value-chain bridge; KEY_GOTOMARKET → GTM; KEY_PRODUCTGROUPORG; GEO_KEY → VW_DIM_GEOGRAPHY; KEY_CUSTOMER_TOPENDPARENT → customer; COMPOSITE_KEY → sfdc_account_live_composite; OWNER_COMPOSITE_KEY → sfdc_owner_accounts_composite; KEY_MEASURE_UNITS/DOLLAR → PURPLE/ORANGE bridges (inactive)
+Dimension links that matter for DPM [CONFIRMED]
+VW_DIM_GEOGRAPHY.MEGAREGION → dim_megaregion. This is how region security reaches facts that join on geography.
+VW_DIM_GEOGRAPHY.SUBREGION → dim_subregion_lookup
+VW_DIM_GEOGRAPHY.SALES_VP_TERRITORY_KEY ↔ territory_key_dist (both directions)
+VW_DIM_PRODUCT_GROUP_ORG.BUSINESS_UNIT ↔ dim_business_unit (both directions)
+VW_DIM_GOTOMARKET_GTM.CUSTOMERGROUP_LEVEL2_CUST2 ↔ dim_customer_join_lookup (both directions)
+VW_DIM_GOTOMARKET_GTM.SECURITYKEY ← VP2 bridge
+TCP (top customer) key and customer name are in Dim Customer (VW_DIM_CUSTOMER).
+6. Sales hierarchy layer (SFDC). Pipeline and sell-out by partner only
+Source: the SFDC (Salesforce) user table, flattened into owner_hierarchy using the federation ID (user name), user ID and manager ID, looped through about 8 levels of manager links.
+Example: Alice (account owner) sees only her accounts. Bob (Alice's manager) sees his and Alice's. Diana (above both) sees everyone's.
+Chain in the model: owner_hierarchy.OWNER_USER_ID ↔ owner_bridge (both directions, security) ← sfdc_owner_accounts_composite.ACCOUNT_OWNER. Sell-out and pipeline link to sfdc_owner_accounts_composite.
+Shared account lookup: SFDC_ACCOUNT_LIVE_COMPOSITE. This is the SFDC account live table plus one extra composite key = ACCOUNT_ID + ACCOUNT_OWNER_ID.
+Pipeline joins on the account ID or the composite key.
+Sell-out by partner joins KEY_PARTNER_SFDC_ID → account ID.
+Known issue: joining pipeline on ACCOUNT_ID alone showed blanks and mismatches in Power BI validation. The composite key (account ID + account owner ID), suggested by Lynn, fixed it. Validate with Lynn if you use a different join.
+User table filters seen: is_active, current flag, possibly user type = "Standard" [TO VERIFY with Lynn].
+7. App sign-in (Entra) [CONFIRMED from calls]
+Reuse the existing RFP app registration for Entra sign-in. Don't create a new identity provider.
+Add the client secret and a locally generated certificate to the app registration, and store the certificate in Key Vault.
+Copy the RFP backend authentication code.
+Entra returns the user's object ID, email and name. The app currently identifies users by email.
+If another claim is needed (for example the NTID), add it to the token as an optional claim in the app registration.
+The DPM tables use NTID/UPN. Confirm that the identity Entra returns matches NTID_UPN exactly (format, case, domain). [TO VERIFY]
+8. Proposed approach for the app
+
+Main plan: a flat DPM permission table in the lakehouse. The backend filters every query with it.
+
+Build app_dpm_user_access by unioning the 9 DPM security tables (owner_hierarchy is handled separately as layer 2):
+sql
+CREATE OR REPLACE TABLE app_dpm_user_access AS
+SELECT LOWER(NTID_UPN) AS ntid, 'VALUECHAIN' AS dim, VALUE AS allowed_value FROM VW_DIM_SECURITY_VALUECHAIN
+UNION ALL SELECT LOWER(NTID_UPN), 'VP2',          VALUE FROM VW_DIM_SECURITY_VP2
+UNION ALL SELECT LOWER(NTID_UPN), 'MEGAREGION',   VALUE FROM VW_DIM_SECURITY_MEGAREGION
+UNION ALL SELECT LOWER(NTID_UPN), 'PRODUCTGROUP', VALUE FROM VW_DIM_SECURITY_PRODUCTGROUP
+UNION ALL SELECT LOWER(NTID_UPN), 'BLUE',   VALUE FROM VW_DIM_SECURITY_MEASURES_BLUE
+UNION ALL SELECT LOWER(NTID_UPN), 'GREEN',  VALUE FROM VW_DIM_SECURITY_MEASURES_GREEN
+UNION ALL SELECT LOWER(NTID_UPN), 'RED',    VALUE FROM VW_DIM_SECURITY_MEASURES_RED
+UNION ALL SELECT LOWER(NTID_UPN), 'PURPLE', VALUE FROM VW_DIM_SECURITY_MEASURES_PURPLE
+UNION ALL SELECT LOWER(NTID_UPN), 'ORANGE', VALUE FROM VW_DIM_SECURITY_MEASURES_ORANGE;
+
+If the bridges expand values, join each security table through its _BRIDGE so the table stores the actual data keys.
+
+At sign-in: load the user's rows once and cache them for the session.
+On every data query: add WHERE filters for value chain (KEY_VALUECHAIN), customer (GTM SECURITYKEY), product group (KEY_PRODUCTGROUPORG) and region (geography → megaregion).
+Measure masking: hide units, dollars or cost columns based on the color rows (see the table in section 4).
+On top of that, apply layer 2 (sales hierarchy, pipeline and sell-out only) and layer 3 (SIP role configuration, all views).
+Refresh the flat table whenever the source security tables refresh.
+
+Fallback: use the semantic model directly. The Power BI REST API executeQueries call supports impersonatedUserName, so DAX runs under the model's own RLS. This reuses DPM exactly. Check two things: whether the service principal is allowed to impersonate on a dataset with RLS, and whether it's fast enough. Write-back would still go to the database.
+
+Manager's three options (from the call): (1) build a table and check it can copy all the logic, (2) use the semantic model directly through an API, (3) a query/script that pulls data through the semantic model into the app.
