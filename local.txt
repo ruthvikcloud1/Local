@@ -522,3 +522,50 @@ Admin tasks: adding users, changing roles, and what to do when the app isn’t w
 Glossary: BOH, EOH, WOI, MOF, AOP, SIP, MNC.
 
 For each screen, use the same format: purpose (1 line) → screenshot → numbered steps → what each role sees or can do there → notes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Mm-hmm. I will record this as one second. Okay.  We need to create a table... Do we have the record permission? Can you record this?  Uh, is that a coincident? No, I don't think I can record it. Not able to see.  Okay, okay. The call probably could be seated. Nope.  Okay. So, see, basically, when a user signs in through entra or something, right? So you can extract a UPN or this indeed.  Basically, the remake, look, the chart idea or email. This is called as the NTAD, Federation identifier. Okay.  So, using that Federation identifier, so main purpose of our DPM is what we need to hide these values for them. It shouldn't be visible. Mm-hmm.  Yeah. So across all the all the 5 or 6 factories, we are one, two, three, four, five, six, 16 minutes, right? So it's basically row level security.  RLS is DPM. Okay. So, How we are gonna do it is, Basically, when a user signs in, they'll have a, they'll get a ID user ID or like email.  You basically have to map it against this NTID table that we have viewed in EMP, PRMSN, right? You have to map it, again, is this? And then this column has like your dim, has value on everything, so.  Yeah, super red. You have all these values, right? So these values, if you see, they will be available in each of these.  Like, let's say I'm opening the red. I don't know if it's not opening. Good 12nd for me a second.  I don't know why this is not working. Give me a 2nd. Sorry.  Well, actually, this is just a idea that I had okay. Maybe we can try this out. Because I don't see a way that we can use the semantic mode.  So I was checking for options and everything, so what Claude suggested was like, uh, like creating a table is a better option. So if we use the semantic model, then we have to Dax squid in everything, right? So that might take a little longer for the user to, you know.  Not tax square, you know, like, uh, I mean, yeah, that's where is one option, but like, uh, what we can do is like, Wait, I'm just thinking. And I've noted a town weight. I'm just thinking how I can explain it easy.  Okay, so basically we have this final table, right? Like, I mean, I believe this is the concatenated version of all these cities. That's what Lin said.  Yeah. So it has all these values that it gets here. Uh, What we can do is We already know a user list, right?  We do have like all the list of users using this ID. Like they did from the user team. From that user table, we can join or map all these IDs for a direct match and then based on the value, right?  So users will have A direct join in this table with respect to values for them. Okay, I already need to have it. So we can we can use this particular value.  To map against this user ID and this value to map against all the other colors that we have kept. So if you open orange, okay, purple, it's not working. Wait, let me open something that works.  Okay, gold. okay. So gold money has these these values, right? So we can use these this main table. to get the value of or the color of what exactly they are, right?  So, for example, if you see, let's check if it's there in your first. John stays. Oh yeah, he's here.  I saw him on the tier. Right? So here his value is global commercial America style, right?  Okay. They must go to market. GTM worldwide.  This this is, right? So we can take his ID and map it against all the color tables that we have to figure out which one he is he belongs to. He go here, he belongs to the value gold, yeah.  Right. So in turn, we know that gold has certain certain features or capabilities. So if you go to the value chain, So these are all people who can see the sending values, right?  So they they should they should only have access to Vasilian Mali. So what exactly we're trying to do is we are going to map the uses based on their values. That's it.  So how we have to do it in terms of the application is. So We have already created 4 or five, 6 stack tables, right? So you have to map all these columns.  I mean, all these tables, to that fat table, based on their user ID. Okay. That's their relationship.  Okay. You're just, you're just brainstorm it. Like based on your understanding, how you can do it.  I'll send you a detailed flow on everything tomorrow. More like a slow day, you know, maybe you'll understand it better. Okay.  So for now, just understanding this thing. You have to map the user to their respective values and then do the fact tables, right? Yes, values, what exactly they can access and have control over?  those things, right? That's what that's what is happening. Yeah.  Mm-hmm, okay. So, some research on this. I'll tell you the flow tomorrow of how we can do this correctly.  Got it, got it. So yeah, I try to figure out something. Uh, yeah.  But tomorrow then even I will have a like better understanding of this. How to, you know, come up with a approach. Okay, sounds good.  Uh yeah. All right, yeah. So, so in the master table, we can see that like there is global commercial, global, commercial MDC.  Okay. But in the, go through the data 1st and like try to see like what exactly each of those tables are 1st. Mm-hmm.  So it's not like only you should see that one single table, right? You need to see all the data. So, understand what each of the color and each of the table is doing, the security table.  You have even the security mega region product to value chain BP to so many tips. So see how those are in our application and how you are going to use them in our application. Okay.  We have to create a table, sequence. I mean, yeah, okay. Yeah, I'll try to send a flow tomorrow in the morning if it's possible.  You do some research. Got it, got it. Sure, sure.  Okay. Okay, yeah, sounds good. sounds good. Bye, bye. 
+
+What this call was about (short and simple)
+
+Main point: DPM is row-level security (RLS). Its job is to hide data a user isn’t allowed to see, across all 5–6 fact tables.
+
+The flow your teammate described:
+
+User signs in through Entra. The app gets their UPN / email, which is the NTID (federation identifier).
+Look them up in EMP_PRMSN (employee permission). Per Lynn, this is the final, combined version of all the security tables. It has the user’s ID plus dim and value columns.
+Map the user’s values to the security tables: the color tables, value chain, VP2, megaregion and product group. That tells you what they can access.
+Example: John’s value is “Global Commercial America” (GTM worldwide), and he appears in the GOLD color table.
+Value chain example: users listed for sell-in should only see sell-in values.
+Connect all of this to the fact tables by user ID, so each user sees only their rows.
+
+Other points:
+
+Your teammate (and Claude, when they asked it) also thinks creating a table is better than using the semantic model. With the semantic model, everything would go through DAX queries, which could be slow for users.
+They suggested joining the user list (from the user table) to these values by direct match on ID.
+They’ll send a detailed flow tomorrow morning.
+
+Your task until then:
+
+Go through all the security tables, not just the one combined table.
+Understand what each color table and each security table (megaregion, product group, value chain, VP2) does.
+Think about how each one will be used in the app.
+What this changes in our approach
+EMP_PRMSN may already be the combined table. If it is, we don’t need to union the 9 tables ourselves. We can use it directly, or build from it.
+There’s a GOLD color table. It wasn’t in the model notes or my PySpark code, so there may be more tables than the 9 we listed. Check the lakehouse for every VW_DIM_SECURITY_* table, and add any missing ones (like GOLD) to the code.
+Check what each color means. We know Blue, Green, Red, Purple and Orange, but not Gold.
+
+To check before tomorrow’s flow arrives, compare EMP_PRMSN against the individual security tables for a few users. Do they show the same values?
